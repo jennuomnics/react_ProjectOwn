@@ -1,56 +1,50 @@
-import { useEffect, useState } from "react";
-
-
-
-import type { FormikHelpers } from "formik";
-import { useFlats, type flatsSchema } from "../Contexts/FlatsContext";
-import FlatsModal from "../Components/FlatsModal";
+import { useState } from "react";
+import { deletePlots, getPlots, updatePlots, type plotSchema } from "../../Slices/plotSlice";
+import Modals from "../../Components/Modals";
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../store";
-import { addToCart } from "../Slices/cartSlice";
+import { type AppDispatch, type RootState } from "../../store";
+import type { addHomeSchema } from "../../Slices/homeSlice";
+import type { FormikHelpers } from "formik";
+import { addToCart } from "../../Slices/cartSlice";
 import toast from "react-hot-toast";
 
-interface flatDetails {
-  flat: flatsSchema;
+
+interface plotDetails {
+    plot:plotSchema
 }
 
-interface addFlatSchema {
-  title: string;
-  location: string;
-  price: number;
-  description: string;
-  imageUrl: File | null; 
-  previewImage?:string,
-}
+const PlotItems = ({plot}:plotDetails) => {
 
-async function urlToFile(url:string, filename:string, mimeType:string) {
-  const res = await fetch(url);
-  const buffer = await res.arrayBuffer();
-  return new File([buffer], filename, { type: mimeType });
-}
+    const dispatch = useDispatch<AppDispatch>()
 
+    const {id,imageUrl,title,location,price,description} = plot
 
+    const {cart} = useSelector((state:RootState) => state.cart)
 
-const FlatItems = ({ flat }: flatDetails) => {
+    const isAdded = cart.find((item) => item.id === id)
 
-  const { id, imageUrl, title, location, price, description } = flat;
-  const {updateFlat,getFlats,deleteFlat} = useFlats()
-const [intialValues, setInitialValues] = useState<addFlatSchema | null>(null);
-const dispatch = useDispatch<AppDispatch>();
-    const { cart } = useSelector((state: RootState) => state.cart);
+    const intialValues = {
+      title,
+      location,
+      price,
+      description,
+      imageUrl,
+    };
+    const [open, setOpen] = useState(false);
+      const handleOpen = () => setOpen(true);
+      const handleClose = () => setOpen(false);
 
-    const isAdded = cart.find((item) => item.id === id);
+    const handleSubmit = (Values:addHomeSchema,action:FormikHelpers<addHomeSchema>) => {
+      dispatch(updatePlots({...Values,id}))
+      action.resetForm()
+      handleClose()
+      dispatch(getPlots())
+    }
 
-  const preImage = imageUrl
-
-
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
 
     const handleAddtoCart = () => {
-      if (id) {
+      if(id) {
         const newItem = {
           id,
           title,
@@ -62,57 +56,17 @@ const dispatch = useDispatch<AppDispatch>();
           totalPrice: price,
         };
         dispatch(addToCart(newItem));
-        toast.success(`${title} to Cart`);
+        toast.success(`${title} to Cart`)
       }
-    };
+     }
+      
 
 
-  const handleSubmit = (
-    Values: addFlatSchema,
-    action: FormikHelpers<addFlatSchema>
-  ) => {
-    if(Values.imageUrl) {
-        const createImageUrl = URL.createObjectURL(Values.imageUrl)
-        updateFlat({
-            ...Values,
-            imageUrl:createImageUrl,
-            id,
-        })
-        getFlats()
+    const handleDelete =() => {
+      dispatch(deletePlots(id))
+      dispatch(getPlots())
+      
     }
-     setOpen(false);
-     action.resetForm();
-  };
-
-  const handleDelete = () => {
-    if(id) {
-      deleteFlat(id);
-      getFlats();
-    }
-    
-  };
-
-  const getInitalValues = async () => {
-    return {
-      title,
-      location,
-      price,
-      description,
-      imageUrl: await urlToFile(imageUrl, "image.jpg", "image/jpeg"),
-    };
-  };
-
-  useEffect(() => {
-    const fetchInitialValues = async () => {
-      const values = await getInitalValues();
-      setInitialValues(values);
-    };
-
-    fetchInitialValues();
-  }, []);
-  
-
-
 
   return (
     <li>
@@ -140,11 +94,12 @@ const dispatch = useDispatch<AppDispatch>();
         </div>
         <div className="px-4 pb-4 pt-0 mt-2 flex gap-4">
           <button
+           disabled={isAdded?true:false}
             className="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             type="button"
             onClick={() => handleAddtoCart()}
           >
-            {isAdded ? "Already Added" : "Add to Cart"}
+           {isAdded ? 'Already Added': 'Add to Cart'}
           </button>
           <div className="flex items-center space-x-4">
             <button
@@ -157,7 +112,7 @@ const dispatch = useDispatch<AppDispatch>();
             <button
               type="button"
               className="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
-              onClick={() => handleDelete()}
+             onClick={() => handleDelete()}
             >
               <svg
                 className="mr-1 -ml-1 w-5 h-5"
@@ -166,9 +121,9 @@ const dispatch = useDispatch<AppDispatch>();
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fillRule="evenodd"
+                  fill-rule="evenodd"
                   d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                  clipRule="evenodd"
+                  clip-rule="evenodd"
                 ></path>
               </svg>
               Delete
@@ -177,19 +132,17 @@ const dispatch = useDispatch<AppDispatch>();
         </div>
       </div>
 
-      <FlatsModal
+      <Modals
         open={open}
         setOpen={setOpen}
         handleOpen={handleOpen}
         handleClose={handleClose}
-        // @ts-ignore
         intialValues={intialValues}
         fun="Update"
         handleSubmit={handleSubmit}
-        previewImage={preImage}
       />
     </li>
   );
-};
+}
 
-export default FlatItems;
+export default PlotItems

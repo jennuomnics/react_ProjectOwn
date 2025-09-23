@@ -1,9 +1,9 @@
 
 import { Field, Form, Formik,type FormikHelpers} from "formik";
-import Header from '../Components/Header';
+import Header from '../../Components/Header.tsx';
 
-import { registerSchema } from '../schema/register';
-import api from '../axios.ts'
+import { registerSchema } from '../../schema/register.ts';
+import api from '../../axios.ts'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";

@@ -254,6 +254,7 @@ function generateAccessToken(user) {
   });
 }
 
+
 // === Middleware ===
 function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
@@ -306,7 +307,6 @@ app.post("/api/register", (req, res) => {
   res.status(201).json({ message: "User registered successfully" });
 });
 
-// === Login User ===
 app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
   const user = users.find(
@@ -316,7 +316,13 @@ app.post("/api/login", (req, res) => {
     return res.status(401).json({ message: "Invalid email or password" });
 
   const accessToken = generateAccessToken(user);
-  res.json({ accessToken });
+
+  // Return accessToken and user details
+  res.json({
+    accessToken,
+    firstName: user.firstName,
+    lastName: user.lastName,
+  });
 });
 
 // === CRUD Handler for Homes, Plots, Flats ===

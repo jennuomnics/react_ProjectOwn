@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import CartItems from "./CartItems";
-import type { RootState } from "../store";
-import { OriginalPrice } from "../Slices/cartSlice";
+import CartItems from './CartItems';
+import type { RootState } from "../../store";
+import { OriginalPrice } from "../../Slices/cartSlice";
 import { useNavigate } from "react-router-dom";
 
 

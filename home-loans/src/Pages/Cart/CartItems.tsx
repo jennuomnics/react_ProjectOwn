@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { decreaseQuantity, increaseQuantity, removeFromCart, type CartItemsSchema } from "../Slices/cartSlice";
-import type { AppDispatch } from "../store";
+import { decreaseQuantity, increaseQuantity, removeFromCart, type CartItemsSchema } from "../../Slices/cartSlice";
+import type { AppDispatch } from "../../store";
 import toast from "react-hot-toast";
 
 interface cartSchema {

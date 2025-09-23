@@ -1,15 +1,15 @@
 import { BrowserRouter,Navigate,Route,Routes } from "react-router-dom";
 import {Toaster} from 'react-hot-toast'
-import Login from "./Pages/Login";
+import Login from "./Pages/Login/Login";
 import AppLayout from "./Components/AppLayout";
-import Register from "./Pages/Register";
+import Register from "./Pages/Register/Register";
 import Home from "./Components/Home";
-import Homes from "./Pages/Homes";
-import Cart from "./Pages/Cart";
+import Homes from "./Pages/Homes/Homes";
+import Cart from "./Pages/Cart/Cart";
 import CheckOuth from "./Components/CheckOuth";
-import Plots from "./Pages/Plots";
+import Plots from "./Pages/Plots/Plots";
 import { FlatContext } from "./Contexts/FlatsContext";
-import Flats from "./Pages/Flats";
+import Flats from "./Pages/Flats/Flats";
 
 
 const App = () => {

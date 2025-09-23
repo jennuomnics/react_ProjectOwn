@@ -10,10 +10,10 @@ import { Field, Form, Formik, type FormikHelpers } from "formik";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../store";
-import { addHomeValidation } from "../schema/register";
-import { deleteHome, fetchData, updateHome } from "../Slices/homeSlice";
-import { addToCart } from "../Slices/cartSlice";
+import type { AppDispatch, RootState } from "../../store";
+import { addHomeValidation } from "../../schema/register";
+import { deleteHome, fetchData, updateHome } from "../../Slices/homeSlice";
+import { addToCart } from "../../Slices/cartSlice";
 import toast from "react-hot-toast";
 
 export interface homeSchema {

@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 
 import HomesList from "./HomesList.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch,RootState} from "../store.tsx";
-import { addHome, fetchData, type homesStructure } from "../Slices/homeSlice.tsx";
+import type { AppDispatch,RootState} from "../../store.tsx";
+import { addHome, fetchData, type homesStructure } from "../../Slices/homeSlice.tsx";
 import Box from "@mui/material/Box";
 
 import Typography from "@mui/material/Typography";
@@ -12,8 +12,8 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { Field, Form, Formik, type FormikHelpers, type FormikProps } from "formik";
-import { addHomeValidation } from "../schema/register.ts";
-import MapView from "../Components/MapView.tsx";
+import { addHomeValidation } from "../../schema/register.ts";
+import MapView from "../../Components/MapView.tsx";
 
 
  interface addHomeSchema {

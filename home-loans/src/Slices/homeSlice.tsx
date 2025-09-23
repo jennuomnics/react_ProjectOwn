@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { type homeSchema } from "../Pages/HomesList";
+import { type homeSchema } from "../Pages/Homes/HomesList.tsx";
 import axios from '../axios.ts'
 import toast from "react-hot-toast";
 

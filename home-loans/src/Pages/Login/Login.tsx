@@ -1,8 +1,8 @@
 import { useState, type FormEvent } from "react";
-import Header from "../Components/Header"
+import Header from "../../Components/Header"
 import { FaEye } from "react-icons/fa";
 import { GoEyeClosed } from "react-icons/go";
-import api from "../axios";
+import api from "../../axios";
 import axios,{AxiosError} from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -27,6 +27,8 @@ const handleLogin = async(e:FormEvent):Promise<void> => {
       if (response.status === 200) {
         toast.success('Successfully Login')
         localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem("firstName",response.data.firstName)
+        localStorage.setItem("lastName",response.data.lastName)
         navigate("/designs");
       }
     }

@@ -11,6 +11,8 @@ import { FaUserEdit } from "react-icons/fa";
 const Header = () => {
   const navigate = useNavigate();
   const isLogin = localStorage.getItem("accessToken");
+  const firstName = localStorage.getItem("firstName")
+  const lastName = localStorage.getItem("lastName")
   const totalCartItem = useSelector(cartLength);
   const [showDropDown,setShowDropDown] = useState(false)
 
@@ -56,7 +58,7 @@ const Header = () => {
             {showDropDown && (
               <div className="bg-white h-[200px] w-[180px] absolute top-12 right-4 shadow-md z-100 rounded-xl flex flex-col items-start justify-between p-3">
                 <h2 className="text-stone-800 font-bold hover:bg-stone-200 p-1 rounded-md">
-                  @Suryateja
+                  @{firstName}{lastName}
                 </h2>
                 <div className="flex items-center gap-1  hover:bg-stone-200 p-1 rounded-md">
                   <IoIosSettings />
