@@ -134,7 +134,7 @@ const Plots = () => {
           handleOpen={handleOpen}
           handleClose={handleClose}
           intialValues={intialValues}
-          fun="add"
+          fun="Add"
           handleSubmit={handleSubmit}
         />
       )}

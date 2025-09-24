@@ -15,6 +15,21 @@ const intialValues = {
   price: 0,
   description: "",
   imageUrl: null,
+  bhkType: '',
+  bedrooms: 0,
+  bathrooms: 0,
+  balconies: 0,
+  floorNumber:0,
+  totalFloors: 0,
+  furnishing: '',
+  availability: '',
+  parking: '',
+  nearbyAmenities: [],
+  areaSqFt: 0,
+  acAvailable: false,
+  liftAvailable: false,
+  security: false,
+  powerBackup:false
 };
 
 interface addFlatSchema {
@@ -22,7 +37,23 @@ interface addFlatSchema {
   location: string;
   price: number;
   description: string;
-  imageUrl: File | null; 
+  imageUrl: File | null;
+
+  bhkType: string;
+  bedrooms: number;
+  bathrooms: number;
+  balconies: number;
+  floorNumber: number;
+  totalFloors: number;
+  furnishing: string;
+  availability: string;
+  parking: string;
+  nearbyAmenities: string[];
+  areaSqFt: number;
+  acAvailable: boolean;
+  liftAvailable: boolean;
+  security: boolean;
+  powerBackup: boolean;
 }
 
 const Flats = () => {

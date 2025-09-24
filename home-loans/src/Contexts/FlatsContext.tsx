@@ -22,12 +22,27 @@ interface FlatContextType {
 
 
 export interface flatsSchema {
-    id?:number,
-    title:string,
-    location:string,
-    description:string,
-    imageUrl:string,
-    price:number
+  id?: string;
+  title: string;
+  location: string;
+  description: string;
+  imageUrl: string;
+  price: number;
+  bhkType: string;
+  bedrooms: number;
+  bathrooms: number;
+  balconies: number;
+  floorNumber: number;
+  totalFloors: number;
+  furnishing: string;
+  availability: string;
+  parking: string;
+  nearbyAmenities: string[];
+  areaSqFt: number;
+  acAvailable: boolean;
+  liftAvailable: boolean;
+  security: boolean;
+  powerBackup: boolean;
 }
 
 interface flatsStructure {

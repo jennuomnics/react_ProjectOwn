@@ -1,42 +1,41 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { FaHome } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+import { FaHome, FaDollyFlatbed, FaCartPlus } from "react-icons/fa";
 import { AiOutlineBoxPlot } from "react-icons/ai";
-import { FaDollyFlatbed } from "react-icons/fa";
-import { FaCartPlus } from "react-icons/fa";
 
+const navItems = [
+  { to: "home", label: "Homes", icon: <FaHome /> },
+  { to: "plot", label: "Plots", icon: <AiOutlineBoxPlot /> },
+  { to: "flat", label: "Flats", icon: <FaDollyFlatbed /> },
+  { to: "cart", label: "Cart", icon: <FaCartPlus /> },
+];
 
 const SideBar = () => {
   return (
-    <div className="bg-white-400 w-[20%] shadow-2xl flex justify-center p-5">
-      <ul className="flex flex-col gap-10">
-        <li className="flex items-center gap-4 hover:bg-stone-300 px-5 rounded-2xl">
-          <FaHome className="text-xl" />
-          <NavLink to="home" className="text-stone-800 font-bold text-xl">
-            Home
-          </NavLink>
-        </li>
-        <li className="flex items-center gap-4 hover:bg-stone-300 px-5 rounded-2xl">
-          <AiOutlineBoxPlot className="text-xl" />
-          <NavLink to="plot" className="text-stone-800 font-bold text-xl">
-            Plots
-          </NavLink>
-        </li>
-        <li className="flex items-center gap-4 hover:bg-stone-300 px-5 rounded-2xl">
-          <FaDollyFlatbed className="text-xl" />
-          <NavLink to="flat" className="text-stone-800 font-bold text-xl">
-            Flats
-          </NavLink>
-        </li>
-        <li className="flex items-center gap-4 hover:bg-stone-300 px-5 rounded-2xl">
-          <FaCartPlus className="text-xl" />
-          <NavLink to="cart" className="text-stone-800 font-bold text-xl">
-            Cart
-          </NavLink>
-        </li>
-      </ul>
-    </div>
+    <aside className="w-64 h-screen bg-white shadow-xl p-6 mt-1">
+      <nav>
+        <ul className="flex flex-col gap-4">
+          {navItems.map(({ to, label, icon }) => (
+            <li key={to}>
+              <NavLink
+                to={to}
+                className={({ isActive }) =>
+                  `flex items-center gap-4 px-4 py-3 rounded-lg font-medium text-lg transition-all duration-200
+                   ${
+                     isActive
+                       ? "bg-blue-100 text-blue-700 font-semibold"
+                       : "text-gray-700 hover:bg-gray-100"
+                   }`
+                }
+              >
+                <span className="text-xl">{icon}</span>
+                <span>{label}</span>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
   );
-}
+};
 
-export default SideBar
+export default SideBar;

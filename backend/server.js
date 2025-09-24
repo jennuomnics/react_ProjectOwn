@@ -297,6 +297,21 @@ let flats = [
     title: "Furnished 1BHK in Mumbai",
     location: "Mumbai",
     price: 66000, // ₹5,500,000
+    bhkType: "1BHK",
+    bedrooms: 1,
+    bathrooms: 1,
+    balconies: 1,
+    floorNumber: 3,
+    totalFloors: 7,
+    furnishing: "Furnished",
+    availability: "Ready to Move",
+    parking: "Covered",
+    nearbyAmenities: ["Metro", "Hospital", "Supermarket"],
+    areaSqFt: 550,
+    acAvailable: true,
+    liftAvailable: true,
+    security: true,
+    powerBackup: true,
     description: "Compact furnished flat ideal for working professionals.",
     imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPnrqWdWoi1wMW_1t1Ni_rU6K-oZrrSLFGXyuCSAL8E-bi0sbc3n3M52GMcEFD21qy__o&usqp=CAU",
@@ -308,6 +323,22 @@ let flats = [
     title: "2BHK Flat in Chennai",
     location: "Chennai",
     price: 84000, // ₹7,000,000
+    bhkType: "1BHK",
+    bedrooms: 1,
+    bathrooms: 1,
+    balconies: 1,
+    floorNumber: 3,
+    totalFloors: 7,
+    furnishing: "Furnished",
+    availability: "Ready to Move",
+    parking: "Covered",
+    nearbyAmenities: ["Metro", "Hospital", "Supermarket"],
+    areaSqFt: 550,
+    acAvailable: true,
+    liftAvailable: true,
+    security: true,
+    powerBackup: true,
+
     description: "Spacious flat with amenities and covered parking.",
     imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPnrqWdWoi1wMW_1t1Ni_rU6K-oZrrSLFGXyuCSAL8E-bi0sbc3n3M52GMcEFD21qy__o&usqp=CAU",
@@ -318,6 +349,22 @@ let flats = [
     title: "Studio Apartment in Bangalore",
     location: "Bangalore",
     price: 48000, // ₹4,000,000
+    bhkType: "1BHK",
+    bedrooms: 1,
+    bathrooms: 1,
+    balconies: 1,
+    floorNumber: 3,
+    totalFloors: 7,
+    furnishing: "Furnished",
+    availability: "Ready to Move",
+    parking: "Covered",
+    nearbyAmenities: ["Metro", "Hospital", "Supermarket"],
+    areaSqFt: 550,
+    acAvailable: true,
+    liftAvailable: true,
+    security: true,
+    powerBackup: true,
+
     description: "Modern studio in IT corridor with security and power backup.",
     imageUrl:
       "https://img.staticmb.com/mbimages/project/Photo_h310_w462/2025/08/06/Project-Photo-8-Eminence-24-Vadodara-5434953_1000_1600_310_462.jpg",
@@ -329,6 +376,22 @@ let flats = [
     title: "Luxury 3BHK in Gurgaon",
     location: "Gurgaon",
     price: 120000, // ₹10,000,000
+    bhkType: "1BHK",
+    bedrooms: 1,
+    bathrooms: 1,
+    balconies: 1,
+    floorNumber: 3,
+    totalFloors: 7,
+    furnishing: "Furnished",
+    availability: "Ready to Move",
+    parking: "Covered",
+    nearbyAmenities: ["Metro", "Hospital", "Supermarket"],
+    areaSqFt: 550,
+    acAvailable: true,
+    liftAvailable: true,
+    security: true,
+    powerBackup: true,
+
     description: "High-rise apartment with clubhouse and pool.",
     imageUrl:
       "https://img.staticmb.com/mbimages/project/Photo_h310_w462/2025/08/06/Project-Photo-8-Eminence-24-Vadodara-5434953_1000_1600_310_462.jpg",
@@ -339,6 +402,21 @@ let flats = [
     title: "Budget Flat in Indore",
     location: "Indore",
     price: 31200, // ₹2,600,000
+    bhkType: "1BHK",
+    bedrooms: 1,
+    bathrooms: 1,
+    balconies: 1,
+    floorNumber: 3,
+    totalFloors: 7,
+    furnishing: "Furnished",
+    availability: "Ready to Move",
+    parking: "Covered",
+    nearbyAmenities: ["Metro", "Hospital", "Supermarket"],
+    areaSqFt: 550,
+    acAvailable: true,
+    liftAvailable: true,
+    security: false,
+    powerBackup: false,
     description: "Affordable 2BHK in a peaceful society with basic amenities.",
     imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS3D2O3cvP563mwxlc9BXtvfuagYBZheRByKmfCIKbsGm3LjBsfo1KVOI5XPG3Ld8jhII&usqp=CAU",
@@ -741,7 +819,120 @@ app.delete(
 );
 
 
-createCrudRoutes("flats", flats);
+
+
+// Flats
+
+app.get("/api/flats", authenticateToken, (req, res) => {
+  res.json(flats);
+});
+
+app.post(
+  "/api/flats",
+  authenticateToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const {
+      title,
+      location,
+      price,
+      description,
+      imageUrl,
+      bhkType,
+      bedrooms,
+      bathrooms,
+      balconies,
+      floorNumber,
+      totalFloors,
+      furnishing,
+      availability,
+      parking,
+      nearbyAmenities,
+      areaSqFt,
+      acAvailable,
+      liftAvailable,
+      security,
+      powerBackup,
+    } = req.body;
+
+    // Basic validation
+    if (
+      !title ||
+      !location ||
+      !price ||
+      !description ||
+      !imageUrl ||
+      !bhkType ||
+      !bedrooms ||
+      !bathrooms ||
+      !areaSqFt
+    ) {
+      return res.status(400).json({
+        message:
+          "Missing required fields: title, location, price, description, imageUrl, bhkType, bedrooms, bathrooms, areaSqFt",
+      });
+    }
+
+    const newFlat = {
+      id: uuidv4(),
+      title,
+      location,
+      price,
+      description,
+      imageUrl,
+      bhkType,
+      bedrooms,
+      bathrooms,
+      balconies: balconies ?? 0,
+      floorNumber: floorNumber ?? 1,
+      totalFloors: totalFloors ?? 1,
+      furnishing: furnishing ?? "Unfurnished",
+      availability: availability ?? "Ready to Move",
+      parking: parking ?? "None",
+      nearbyAmenities: nearbyAmenities ?? [],
+      areaSqFt,
+      acAvailable: acAvailable ?? false,
+      liftAvailable: liftAvailable ?? false,
+      security: security ?? false,
+      powerBackup: powerBackup ?? false,
+      addedBy: req.user.id,
+    };
+
+    flats.push(newFlat);
+    res.status(201).json(newFlat);
+  }
+);
+
+app.put(
+  "/api/flats/:id",
+  authenticateToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const itemId = req.params.id;
+    const flat = flats.find((f) => f.id === itemId);
+    if (!flat) return res.status(404).json({ message: "Flat not found" });
+
+    Object.assign(flat, req.body);
+    res.json(flat);
+  }
+);
+
+app.delete(
+  "/api/flats/:id",
+  authenticateToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const itemId = req.params.id;
+    const index = flats.findIndex((f) => f.id === itemId);
+    if (index === -1)
+      return res.status(404).json({ message: "Flat not found" });
+
+    flats.splice(index, 1);
+    res.json({ message: "Flat deleted successfully" });
+  }
+);
+
+// createCrudRoutes("flats", flats);
 
 // === Start Server ===
 app.listen(PORT, () => {

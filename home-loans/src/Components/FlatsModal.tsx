@@ -25,6 +25,21 @@ interface addFlatSchema {
   price: number;
   description: string;
   imageUrl: File | null;
+  bhkType: string;
+  bedrooms: number;
+  bathrooms: number;
+  balconies: number;
+  floorNumber: number;
+  totalFloors: number;
+  furnishing: string;
+  availability: string;
+  parking: string;
+  nearbyAmenities: string[];
+  areaSqFt: number;
+  acAvailable: boolean;
+  liftAvailable: boolean;
+  security: boolean;
+  powerBackup: boolean;
 }
 
 const style = {
@@ -144,7 +159,7 @@ const FlatsModal = ({
             <CloseIcon />
           </IconButton>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Add new Plot
+            {fun} Flat
           </Typography>
 
           <Typography
@@ -156,137 +171,459 @@ const FlatsModal = ({
               initialValues={intialValues}
               validationSchema={addFlatValidation}
               onSubmit={handleSubmit}
-              innerRef={FormikRef}
             >
               {({ errors, touched, setFieldValue, values }) => (
-                <Form>
-                  <div className="h-110 overflow-y-auto mt-5">
-                    <div className="relative z-0 w-full mb-5 group">
-                      <Field
-                        type="text"
-                        name="title"
-                        id="title"
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" "
-                        required
-                      />
-                      <label
-                        htmlFor="title"
-                        className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                      >
-                        Title
-                      </label>
-                      {errors.title && touched.title && (
-                        <p className="text-red-400  ">{errors.title}</p>
-                      )}
-                    </div>
-
-                    <div className="relative z-0 w-full mb-5 group">
-                      <Field
-                        type="text"
-                        name="location"
-                        id="location"
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" "
-                        value={values.location}
-                        required
-                      />
-                      <label
-                        htmlFor="location"
-                        className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                      >
-                        Location
-                      </label>
-                      <button
-                        type="button"
-                        onClick={() => {setOpenMap(true)
-                          setShowParentModal(false)
-                        }}
-                        className="py-1 px-6 mt-2 rounded-2xl bg-stone-800 text-white font-bold cursor-pointer"
-                      >
-                        Select Loction
-                      </button>
-                      {errors.location && touched.location && (
-                        <p className="text-red-400  ">{errors.location}</p>
-                      )}
-                    </div>
-
-                    <div className="relative z-0 w-full mb-5 group">
-                      <Field
-                        type="number"
-                        name="price"
-                        id="price"
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" "
-                        required
-                      />
-                      <label
-                        htmlFor="price"
-                        className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                      >
-                        Price
-                      </label>
-                      {errors.price && touched.price && (
-                        <p className="text-red-400  ">{errors.price}</p>
-                      )}
-                    </div>
-                    <div className="relative z-0 w-full mb-5 group">
-                      <Field
-                        as="textarea"
-                        name="description"
-                        id="description"
-                        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=" "
-                        required
-                      ></Field>
-                      <label
-                        htmlFor="description"
-                        className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                      >
-                        description
-                      </label>
-                      {errors.description && touched.description && (
-                        <p className="text-red-400 ">{errors.description}</p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        htmlFor="imageUrl"
-                      >
-                        Upload file
-                      </label>
-                      <input
-                        className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                        aria-describedby="file_input_help"
-                        id="file_input"
-                        type="file"
-                        name="imageUrl"
-                        onChange={(event) => {
-                          const file = event.currentTarget.files?.[0];
-                          setFieldValue("imageUrl", file || null);
-                        }}
-                      />
-                      <p
-                        className="mt-1 text-sm text-gray-500 dark:text-gray-300"
-                        id="file_input_help"
-                      >
-                        SVG, PNG, JPG or GIF (MAX. 800x400px).
+                <Form className="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-md shadow-md space-y-6 h-100 overflow-y-auto">
+                  {/* Title */}
+                  <div>
+                    <label
+                      htmlFor="title"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Title
+                    </label>
+                    <Field
+                      type="text"
+                      name="title"
+                      id="title"
+                      placeholder="Enter title"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    />
+                    {errors.title && touched.title && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.title}
                       </p>
-
-                      {errors.imageUrl && touched.imageUrl && (
-                        <p className="text-red-400 ">{errors.imageUrl}</p>
-                      )}
-                    </div>
-                    <ImagePreview previewImage={previewImage} />
+                    )}
                   </div>
 
+                  {/* Location */}
+                  <div>
+                    <label
+                      htmlFor="location"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Location
+                    </label>
+                    <Field
+                      type="text"
+                      name="location"
+                      id="location"
+                      placeholder="Enter location"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    />
+                    {errors.location && touched.location && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.location}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Price */}
+                  <div>
+                    <label
+                      htmlFor="price"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Price
+                    </label>
+                    <Field
+                      type="number"
+                      name="price"
+                      id="price"
+                      placeholder="Enter price"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    />
+                    {errors.price && touched.price && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.price}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Description */}
+                  <div>
+                    <label
+                      htmlFor="description"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Description
+                    </label>
+                    <Field
+                      as="textarea"
+                      name="description"
+                      id="description"
+                      placeholder="Enter description"
+                      rows={4}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm resize-none
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    />
+                    {errors.description && touched.description && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.description}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Image Upload */}
+                  <div>
+                    <label
+                      htmlFor="imageUrl"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Upload Image
+                    </label>
+                    <input
+                      id="imageUrl"
+                      name="imageUrl"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        setFieldValue(
+                          "imageUrl",
+                          e.currentTarget.files
+                            ? e.currentTarget.files[0]
+                            : null
+                        );
+                      }}
+                      className="w-full text-gray-900 bg-white border border-gray-300 rounded-md cursor-pointer
+            dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400 focus:outline-none"
+                    />
+                    {errors.imageUrl && touched.imageUrl && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.imageUrl}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* BHK Type */}
+                  <div>
+                    <label
+                      htmlFor="bhkType"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      BHK Type
+                    </label>
+                    <Field
+                      as="select"
+                      name="bhkType"
+                      id="bhkType"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    >
+                      <option value="">Select BHK Type</option>
+                      <option value="1BHK">1 BHK</option>
+                      <option value="2BHK">2 BHK</option>
+                      <option value="3BHK">3 BHK</option>
+                      <option value="4BHK">4 BHK</option>
+                      <option value="Penthouse">Penthouse</option>
+                    </Field>
+                    {errors.bhkType && touched.bhkType && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.bhkType}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Bedrooms */}
+                  <div>
+                    <label
+                      htmlFor="bedrooms"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Bedrooms
+                    </label>
+                    <Field
+                      type="number"
+                      name="bedrooms"
+                      id="bedrooms"
+                      placeholder="Number of bedrooms"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    />
+                    {errors.bedrooms && touched.bedrooms && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.bedrooms}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Bathrooms */}
+                  <div>
+                    <label
+                      htmlFor="bathrooms"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Bathrooms
+                    </label>
+                    <Field
+                      type="number"
+                      name="bathrooms"
+                      id="bathrooms"
+                      placeholder="Number of bathrooms"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    />
+                    {errors.bathrooms && touched.bathrooms && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.bathrooms}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Balconies */}
+                  <div>
+                    <label
+                      htmlFor="balconies"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Balconies
+                    </label>
+                    <Field
+                      type="number"
+                      name="balconies"
+                      id="balconies"
+                      placeholder="Number of balconies"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    />
+                    {errors.balconies && touched.balconies && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.balconies}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Floor Number */}
+                  <div>
+                    <label
+                      htmlFor="floorNumber"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Floor Number
+                    </label>
+                    <Field
+                      type="number"
+                      name="floorNumber"
+                      id="floorNumber"
+                      placeholder="Floor number"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    />
+                    {errors.floorNumber && touched.floorNumber && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.floorNumber}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Total Floors */}
+                  <div>
+                    <label
+                      htmlFor="totalFloors"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Total Floors
+                    </label>
+                    <Field
+                      type="number"
+                      name="totalFloors"
+                      id="totalFloors"
+                      placeholder="Total floors"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    />
+                    {errors.totalFloors && touched.totalFloors && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.totalFloors}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Furnishing */}
+                  <div>
+                    <label
+                      htmlFor="furnishing"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Furnishing
+                    </label>
+                    <Field
+                      type="text"
+                      name="furnishing"
+                      id="furnishing"
+                      placeholder="Enter furnishing details"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    />
+                    {errors.furnishing && touched.furnishing && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.furnishing}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Availability */}
+                  <div>
+                    <label
+                      htmlFor="availability"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Availability
+                    </label>
+                    <Field
+                      type="text"
+                      name="availability"
+                      id="availability"
+                      placeholder="Availability status"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    />
+                    {errors.availability && touched.availability && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.availability}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Parking */}
+                  <div>
+                    <label
+                      htmlFor="parking"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Parking
+                    </label>
+                    <Field
+                      type="text"
+                      name="parking"
+                      id="parking"
+                      placeholder="Parking details"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    />
+                    {errors.parking && touched.parking && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.parking}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Nearby Amenities (example as comma separated input) */}
+                  <div>
+                    <label
+                      htmlFor="nearbyAmenities"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Nearby Amenities (comma separated)
+                    </label>
+                    <Field
+                      type="text"
+                      name="nearbyAmenities"
+                      id="nearbyAmenities"
+                      placeholder="e.g. Park,School,Supermarket"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                      onChange={(e) => {
+                        const vals = e.target.value
+                          .split(",")
+                          .map((v) => v.trim());
+                        setFieldValue("nearbyAmenities", vals);
+                      }}
+                      value={values.nearbyAmenities.join(", ")}
+                    />
+                    {errors.nearbyAmenities && touched.nearbyAmenities && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.nearbyAmenities}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Area (SqFt) */}
+                  <div>
+                    <label
+                      htmlFor="areaSqFt"
+                      className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      Area (SqFt)
+                    </label>
+                    <Field
+                      type="number"
+                      name="areaSqFt"
+                      id="areaSqFt"
+                      placeholder="Enter area in square feet"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm
+            focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+            dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    />
+                    {errors.areaSqFt && touched.areaSqFt && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.areaSqFt}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Boolean checkboxes */}
+                  <div className="flex flex-wrap gap-6">
+                    <label className="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
+                      <Field
+                        type="checkbox"
+                        name="acAvailable"
+                        className="form-checkbox rounded text-blue-600"
+                      />
+                      <span>AC Available</span>
+                    </label>
+
+                    <label className="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
+                      <Field
+                        type="checkbox"
+                        name="liftAvailable"
+                        className="form-checkbox rounded text-blue-600"
+                      />
+                      <span>Lift Available</span>
+                    </label>
+
+                    <label className="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
+                      <Field
+                        type="checkbox"
+                        name="security"
+                        className="form-checkbox rounded text-blue-600"
+                      />
+                      <span>Security</span>
+                    </label>
+
+                    <label className="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
+                      <Field
+                        type="checkbox"
+                        name="powerBackup"
+                        className="form-checkbox rounded text-blue-600"
+                      />
+                      <span>Power Backup</span>
+                    </label>
+                  </div>
+
+                  {/* Submit button */}
                   <button
                     type="submit"
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="w-full py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
-                    {fun} Flat
+                    Submit
                   </button>
                 </Form>
               )}

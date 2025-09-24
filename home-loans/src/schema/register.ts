@@ -84,8 +84,6 @@ export const addFlatValidation = yup.object({
     .mixed()
     .required("Image is required")
     .test("fileSize", "File too large (max 800KB)", (value) => {
-      // @ts-ignore
-      console.log(value, value?.size);
       return value && value instanceof File && value.size <= 800 * 1024;
     })
     .test("fileType", "unsupported file format", (value) => {
@@ -97,4 +95,47 @@ export const addFlatValidation = yup.object({
         )
       );
     }),
+  bhkType: yup.string().required("BHK Type is required"),
+  bedrooms: yup
+    .number()
+    .typeError("Bedrooms must be a number")
+    .required("Bedrooms is required")
+    .min(0, "Must be at least 0"),
+  bathrooms: yup
+    .number()
+    .typeError("Bathrooms must be a number")
+    .required("Bathrooms is required")
+    .min(0, "Must be at least 0"),
+  balconies: yup
+    .number()
+    .typeError("Balconies must be a number")
+    .required("Balconies is required")
+    .min(0, "Must be at least 0"),
+  floorNumber: yup
+    .number()
+    .typeError("Floor Number must be a number")
+    .required("Floor Number is required")
+    .min(0, "Must be at least 0"),
+  totalFloors: yup
+    .number()
+    .typeError("Total Floors must be a number")
+    .required("Total Floors is required")
+    .min(0, "Must be at least 0"),
+  furnishing: yup.string().required("Furnishing is required"),
+  availability: yup.string().required("Availability is required"),
+  parking: yup.string().required("Parking is required"),
+  nearbyAmenities: yup
+    .array()
+    .of(yup.string())
+    .min(1, "At least one nearby amenity is required")
+    .required("Nearby Amenities is required"),
+  areaSqFt: yup
+    .number()
+    .typeError("Area must be a number")
+    .required("Area is required")
+    .min(0, "Must be at least 0"),
+  acAvailable: yup.boolean(),
+  liftAvailable: yup.boolean(),
+  security: yup.boolean(),
+  powerBackup: yup.boolean(),
 });

@@ -227,7 +227,7 @@ const Modals = ({
                     )}
                   </div>
 
-                  {/* Facing Direction */}
+            
                   <div className="w-full group">
                     <label
                       htmlFor="facingDirection"
@@ -246,10 +246,7 @@ const Modals = ({
                       <option value="South">South</option>
                       <option value="East">East</option>
                       <option value="West">West</option>
-                      <option value="North-East">North-East</option>
-                      <option value="South-East">South-East</option>
-                      <option value="North-West">North-West</option>
-                      <option value="South-West">South-West</option>
+                   
                     </Field>
                     {errors.facingDirection && touched.facingDirection && (
                       <p className="text-red-400">{errors.facingDirection}</p>

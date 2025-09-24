@@ -9,6 +9,19 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store";
 import { addToCart } from "../../Slices/cartSlice";
 import toast from "react-hot-toast";
+import {
+  HomeIcon,
+  DevicePhoneMobileIcon,
+  BuildingOfficeIcon,
+  ChartBarIcon,
+  CubeTransparentIcon,
+  ShieldCheckIcon,
+  BoltIcon,
+  MapPinIcon,
+  TruckIcon,
+  UserGroupIcon,
+  CalendarIcon,
+} from "@heroicons/react/24/solid";
 
 interface flatDetails {
   flat: flatsSchema;
@@ -19,8 +32,23 @@ interface addFlatSchema {
   location: string;
   price: number;
   description: string;
-  imageUrl: File | null; 
-  previewImage?:string,
+  imageUrl: File | null;
+  previewImage?: string;
+  bhkType: string;
+  bedrooms: number;
+  bathrooms: number;
+  balconies: number;
+  floorNumber: number;
+  totalFloors: number;
+  furnishing: string;
+  availability: string;
+  parking: string;
+  nearbyAmenities: string[];
+  areaSqFt: number;
+  acAvailable: boolean;
+  liftAvailable: boolean;
+  security: boolean;
+  powerBackup: boolean;
 }
 
 async function urlToFile(url:string, filename:string, mimeType:string) {
@@ -33,7 +61,29 @@ async function urlToFile(url:string, filename:string, mimeType:string) {
 
 const FlatItems = ({ flat }: flatDetails) => {
 
-  const { id, imageUrl, title, location, price, description } = flat;
+  const {
+    id,
+    imageUrl,
+    title,
+    location,
+    price,
+    description,
+    bhkType,
+    bedrooms,
+    bathrooms,
+    balconies,
+    floorNumber,
+    totalFloors,
+    furnishing,
+    availability,
+    parking,
+    nearbyAmenities,
+    areaSqFt,
+    acAvailable,
+    liftAvailable,
+    security,
+    powerBackup,
+  } = flat;
   const {updateFlat,getFlats,deleteFlat} = useFlats()
 const [intialValues, setInitialValues] = useState<addFlatSchema | null>(null);
 const dispatch = useDispatch<AppDispatch>();
@@ -99,6 +149,21 @@ const dispatch = useDispatch<AppDispatch>();
       price,
       description,
       imageUrl: await urlToFile(imageUrl, "image.jpg", "image/jpeg"),
+      bhkType,
+      bedrooms,
+      bathrooms,
+      balconies,
+      floorNumber,
+      totalFloors,
+      furnishing,
+      availability,
+      parking,
+      nearbyAmenities,
+      areaSqFt,
+      acAvailable,
+      liftAvailable,
+      security,
+      powerBackup,
     };
   };
 
@@ -116,11 +181,12 @@ const dispatch = useDispatch<AppDispatch>();
 
   return (
     <li>
-      <div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+      <div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-90">
         <img
           src={imageUrl}
           alt="card-image"
           style={{ height: "250px", objectFit: "fill" }}
+          className="rounded-t-lg"
         />
         <div className="p-2 flex items-center justify-between">
           <p>
@@ -130,14 +196,105 @@ const dispatch = useDispatch<AppDispatch>();
             </span>
           </p>
 
-          <p className="font-bold">🎯{location}</p>
+          <p className="font-bold flex items-center gap-1">
+            <MapPinIcon className="h-5 w-5 text-red-600" />
+            {location}
+          </p>
         </div>
+
         <div className="p-4">
           <h6 className="mb-2 text-slate-800 text-xl font-semibold">{title}</h6>
           <p className="text-slate-600 leading-normal font-light">
             {description}
           </p>
+
+          <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-gray-700">
+            <div className="flex items-center gap-1">
+              <HomeIcon className="h-5 w-5 text-blue-500" />
+              <span>{bhkType}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <UserGroupIcon className="h-5 w-5 text-green-500" />
+              <span>
+                {bedrooms} Bedroom{bedrooms > 1 ? "s" : ""}
+              </span>
+            </div>
+            <div className="flex items-center gap-1">
+              <ChartBarIcon className="h-5 w-5 text-purple-500" />
+              <span>
+                {bathrooms} Bathroom{bathrooms > 1 ? "s" : ""}
+              </span>
+            </div>
+            <div className="flex items-center gap-1">
+              <CubeTransparentIcon className="h-5 w-5 text-yellow-500" />
+              <span>
+                {balconies} Balcony{balconies > 1 ? "ies" : ""}
+              </span>
+            </div>
+            <div className="flex items-center gap-1">
+              <BuildingOfficeIcon className="h-5 w-5 text-pink-500" />
+              <span>
+                Floor {floorNumber} of {totalFloors}
+              </span>
+            </div>
+            <div className="flex items-center gap-1">
+              <DevicePhoneMobileIcon className="h-5 w-5 text-cyan-500" />
+              <span>{furnishing}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <TruckIcon className="h-5 w-5 text-indigo-500" />
+              <span>{parking} Parking</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <CalendarIcon className="h-5 w-5 text-rose-500" />
+              <span>{availability}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <UserGroupIcon className="h-5 w-5 text-teal-500" />
+              <span>{areaSqFt} Sq Ft</span>
+            </div>
+          </div>
+
+
+          <div className="mt-3 flex flex-wrap gap-2 text-xs text-white">
+            {nearbyAmenities.map((amenity) => (
+              <span
+                key={amenity}
+                className="bg-blue-600 px-2 py-0.5 rounded-full"
+              >
+                {amenity}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-4 flex flex-wrap gap-3 text-sm">
+            {acAvailable && (
+              <div className="flex items-center gap-1 text-gray-600">
+                <BoltIcon className="h-5 w-5 text-blue-600" />
+                <span>AC Available</span>
+              </div>
+            )}
+            {liftAvailable && (
+              <div className="flex items-center gap-1 text-gray-600">
+                <BuildingOfficeIcon className="h-5 w-5 text-blue-600" />
+                <span>Lift Available</span>
+              </div>
+            )}
+            {security && (
+              <div className="flex items-center gap-1 text-gray-600">
+                <ShieldCheckIcon className="h-5 w-5 text-blue-600" />
+                <span>Security</span>
+              </div>
+            )}
+            {powerBackup && (
+              <div className="flex items-center gap-1 text-gray-600">
+                <BoltIcon className="h-5 w-5 text-yellow-500" />
+                <span>Power Backup</span>
+              </div>
+            )}
+          </div>
         </div>
+
         <div className="px-4 pb-4 pt-0 mt-2 flex gap-4">
           <button
             className="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
@@ -152,7 +309,7 @@ const dispatch = useDispatch<AppDispatch>();
               type="button"
               onClick={handleOpen}
             >
-              update
+              Update
             </button>
             <button
               type="button"
@@ -177,17 +334,19 @@ const dispatch = useDispatch<AppDispatch>();
         </div>
       </div>
 
-      {open && <FlatsModal
-        open={open}
-        setOpen={setOpen}
-        handleOpen={handleOpen}
-        handleClose={handleClose}
-        // @ts-ignore
-        intialValues={intialValues}
-        fun="Update"
-        handleSubmit={handleSubmit}
-        previewImage={preImage}
-      />}
+      {open && (
+        <FlatsModal
+          open={open}
+          setOpen={setOpen}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          // @ts-ignore
+          intialValues={intialValues}
+          fun="Update"
+          handleSubmit={handleSubmit}
+          previewImage={preImage}
+        />
+      )}
     </li>
   );
 };
