@@ -177,7 +177,7 @@ const dispatch = useDispatch<AppDispatch>();
         </div>
       </div>
 
-      <FlatsModal
+      {open && <FlatsModal
         open={open}
         setOpen={setOpen}
         handleOpen={handleOpen}
@@ -187,7 +187,7 @@ const dispatch = useDispatch<AppDispatch>();
         fun="Update"
         handleSubmit={handleSubmit}
         previewImage={preImage}
-      />
+      />}
     </li>
   );
 };

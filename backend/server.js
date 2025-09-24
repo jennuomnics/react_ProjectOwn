@@ -41,6 +41,13 @@ let homes = [
     title: "Modern 3BHK Villa",
     location: "Bangalore",
     price: 12000,
+    bhkType: "3BHK",
+    bedrooms: 3,
+    bathrooms: 3,
+    kitchenCount: 1,
+    pujaRoom: true,
+    ac: true,
+    amenitiesNearby: ["Supermarket", "Metro Station", "Park"],
     description: "A spacious 3BHK villa with garden and parking space.",
     imageUrl:
       "https://www.bhg.com/thmb/H9VV9JNnKl-H1faFXnPlQfNprYw=/1799x0/filters:no_upscale():strip_icc()/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
@@ -51,6 +58,13 @@ let homes = [
     title: "2BHK Apartment in Pune",
     location: "Pune",
     price: 7500,
+    bhkType: "2BHK",
+    bedrooms: 2,
+    bathrooms: 2,
+    kitchenCount: 1,
+    pujaRoom: true,
+    ac: false,
+    amenitiesNearby: ["Supermarket", "Metro Station", "Park", "D-mart"],
     description: "Compact and modern 2BHK flat in a gated society.",
     imageUrl:
       "https://images.squarespace-cdn.com/content/v1/55f739f4e4b0550fcc13832a/1555510104579-3OHHEQS6TW8VGNBDVWIN/remodel-building-luxury-living-shenandoah-valley-virginia",
@@ -61,6 +75,13 @@ let homes = [
     title: "Luxury Penthouse in Mumbai",
     location: "Mumbai",
     price: 25000,
+    bhkType: "4BHK",
+    bedrooms: 3,
+    bathrooms: 4,
+    kitchenCount: 2,
+    pujaRoom: true,
+    ac: true,
+    amenitiesNearby: ["Supermarket", "Metro Station", "Park"],
     description: "Sea-facing penthouse with premium amenities.",
     imageUrl:
       "https://www.bellacollina.com/hubfs/Real%20Estate/Custom%20Built%20Homes.jpg",
@@ -71,6 +92,13 @@ let homes = [
     title: "Cozy 1BHK in Delhi",
     location: "Delhi",
     price: 4500,
+    bhkType: "3BHK",
+    bedrooms: 1,
+    bathrooms: 1,
+    kitchenCount: 1,
+    pujaRoom: true,
+    ac: false,
+    amenitiesNearby: ["Supermarket", "Metro Station", "Park", "PVR"],
     description: "Perfect for singles or couples, close to metro station.",
     imageUrl:
       "https://cdn.brookfieldresidential.net/-/media/brp/global/modules/news-and-blog/corporate/types-of-homes/detached-singlefamily-home-in-a-suburban-neighborhood--810x540.jpg?rev=574e423b4249440c803df52d3f997d75",
@@ -81,6 +109,13 @@ let homes = [
     title: "Independent House in Hyderabad",
     location: "Hyderabad",
     price: 9800,
+    bhkType: "3BHK",
+    bedrooms: 3,
+    bathrooms: 3,
+    kitchenCount: 1,
+    pujaRoom: true,
+    ac: true,
+    amenitiesNearby: ["Supermarket", "Metro Station", "Park"],
     description: "3BHK independent house in a peaceful neighborhood.",
     imageUrl:
       "https://winworldrealty.in/wp-content/uploads/2024/04/Are-Homes-Becoming-Unaffordable-For-The-Middle-Class-Home-Buyers.jpg",
@@ -91,6 +126,13 @@ let homes = [
     title: "Affordable 2BHK in Lucknow",
     location: "Lucknow",
     price: 5200,
+    bhkType: "3BHK",
+    bedrooms: 3,
+    bathrooms: 3,
+    kitchenCount: 1,
+    pujaRoom: true,
+    ac: true,
+    amenitiesNearby: ["Supermarket", "Metro Station", "Park"],
     description: "Affordable 2BHK with modular kitchen and balcony.",
     imageUrl:
       "https://marque.com.au/imager/uploads/images/Display-Homes/Huntingdale-Ashwood/25098/145_HUNTINGDALE_7381_2024-10-29-041408_kgtf_d41d8cd98f00b204e9800998ecf8427e.webp",
@@ -101,6 +143,13 @@ let homes = [
     title: "Luxury Duplex in Chandigarh",
     location: "Chandigarh",
     price: 16000,
+    bhkType: "3BHK",
+    bedrooms: 3,
+    bathrooms: 3,
+    kitchenCount: 1,
+    pujaRoom: true,
+    ac: true,
+    amenitiesNearby: ["Supermarket", "Metro Station", "Park", "Zudio"],
     description: "4BHK duplex with garden, terrace, and car parking.",
     imageUrl:
       "https://foyr.com/learn/wp-content/uploads/2019/03/traditional-homes-vs-modern-homes.png",
@@ -111,6 +160,13 @@ let homes = [
     title: "Furnished Studio in Goa",
     location: "Goa",
     price: 3800,
+    bhkType: "3BHK",
+    bedrooms: 3,
+    bathrooms: 3,
+    kitchenCount: 1,
+    pujaRoom: true,
+    ac: true,
+    amenitiesNearby: ["Beach", "Metro Station", "Park", "RailwayStation"],
     description: "Fully furnished studio apartment near beach.",
     imageUrl:
       "https://assets.architecturaldigest.in/photos/68b016d726a4bc95603bf47a/4:3/w_1600%2Ch_1200%2Cc_limit/cover%2520image%2520template%25203.jpg",
@@ -121,6 +177,13 @@ let homes = [
     title: "4BHK Independent Villa in Kochi",
     location: "Kochi",
     price: 11500,
+    bhkType: "3BHK",
+    bedrooms: 3,
+    bathrooms: 3,
+    kitchenCount: 1,
+    pujaRoom: true,
+    ac: true,
+    amenitiesNearby: ["D-mart", "Metro Station", "Park"],
     description: "Elegant villa with private garden and smart home system.",
     imageUrl:
       "https://images.ctfassets.net/s4ybdu2ld1ox/4iGrU7mReGVZB2WV4x0YDF/6d7704ac48417104740061e858447afd/mordern-home.jpeg?w=1382&h=922&fl=progressive&q=70&fm=jpg&bg=transparent",
@@ -131,6 +194,13 @@ let homes = [
     title: "Smart Home in Ahmedabad",
     location: "Ahmedabad",
     price: 8900,
+    bhkType: "2BHK",
+    bedrooms: 3,
+    bathrooms: 3,
+    kitchenCount: 1,
+    pujaRoom: true,
+    ac: true,
+    amenitiesNearby: ["Supermarket", "Metro Station", "Park", "AirPort"],
     description: "3BHK smart home with IoT controls and solar panels.",
     imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH7hYmd1grfUCpvThCE1poNtJDIka1FA3jKQ&s",
@@ -144,6 +214,12 @@ let plots = [
     title: "Residential Plot in Bangalore",
     location: "Bangalore",
     price: 96000, // ₹8,000,000
+    areaSqFt: 5000,
+    plotType: "Industrial",
+    facingDirection: "East",
+    roadWidth: "70 ft",
+    availability: "Under Development",
+    nearbyAmenities: ["SEZ", "Warehouse", "Logistics Park"],
     description: "2400 sqft plot in a prime residential area with road access.",
     imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsvw2Ps410NgWCK70xghydN35mwDrfxMEX2w&s",
@@ -154,6 +230,12 @@ let plots = [
     title: "Corner Plot in Hyderabad",
     location: "Hyderabad",
     price: 72000, // ₹6,000,000
+    areaSqFt: 5000,
+    plotType: "Industrial",
+    facingDirection: "West",
+    roadWidth: "60 ft",
+    availability: "Under Development",
+    nearbyAmenities: ["SEZ", "Warehouse", "Logistics Park"],
     description: "East-facing corner plot in a gated layout.",
     imageUrl:
       "https://5.imimg.com/data5/SELLER/Default/2022/5/GS/KC/HP/11696438/residential-plot-for-sale-in-lucknow-500x500.jpg",
@@ -164,6 +246,12 @@ let plots = [
     title: "Farm Plot in Pune Outskirts",
     location: "Pune",
     price: 36000, // ₹3,000,000
+    areaSqFt: 5000,
+    plotType: "Industrial",
+    facingDirection: "South",
+    roadWidth: "60 ft",
+    availability: "Under Development",
+    nearbyAmenities: ["SEZ", "Warehouse", "Logistics Park"],
     description: "1-acre farmland plot suitable for weekend homes.",
     imageUrl:
       "https://www.dlfproperties.org.in/project_pics/dlf-ploted-development-banner-34265.jpg",
@@ -174,6 +262,12 @@ let plots = [
     title: "Plot Near Beach in Goa",
     location: "Goa",
     price: 114000, // ₹9,500,000
+    areaSqFt: 5000,
+    plotType: "Industrial",
+    facingDirection: "North",
+    roadWidth: "60 ft",
+    availability: "Under Development",
+    nearbyAmenities: ["SEZ", "Warehouse", "Logistics Park"],
     description: "Prime beachside plot ideal for resort or villa development.",
     imageUrl:
       "https://5.imimg.com/data5/VS/NC/GB/ANDROID-87851954/product-jpeg-500x500.jpg",
@@ -184,6 +278,12 @@ let plots = [
     title: "Industrial Plot in Noida",
     location: "Noida",
     price: 132000, // ₹11,000,000
+    areaSqFt: 5000,
+    plotType: "Industrial",
+    facingDirection: "North-East",
+    roadWidth: "60 ft",
+    availability: "Under Development",
+    nearbyAmenities: ["SEZ", "Warehouse", "Logistics Park"],
     description: "Commercial/industrial plot near SEZ zone.",
     imageUrl:
       "https://5.imimg.com/data5/SELLER/Default/2023/10/355863176/PD/IA/QS/10662066/approved-residential-plots.jpg",
@@ -403,8 +503,244 @@ function createCrudRoutes(entityName, storageArray) {
 }
 
 // === Create Routes for Homes, Plots, Flats ===
-createCrudRoutes("homes", homes);
-createCrudRoutes("plots", plots);
+// === HOMES ROUTES ===
+
+// GET All Homes
+app.get("/api/homes", authenticateToken, (req, res) => {
+  res.json(homes);
+});
+
+// ADD New Home (Admin only)
+app.post("/api/homes", authenticateToken, authorizeRole("admin"), (req, res) => {
+  const {
+    title,
+    location,
+    price,
+    description,
+    imageUrl,
+    bhkType,
+    bedrooms,
+    bathrooms,
+    kitchenCount,
+    pujaRoom,
+    ac,
+    amenitiesNearby,
+  } = req.body;
+
+  if (
+    !title ||
+    !location ||
+    !price ||
+    !description ||
+    !imageUrl ||
+    !bhkType ||
+    bedrooms === undefined ||
+    bathrooms === undefined ||
+    kitchenCount === undefined ||
+    pujaRoom === undefined ||
+    ac === undefined ||
+    !Array.isArray(amenitiesNearby)
+  ) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  const newHome = {
+    id: uuidv4(),
+    title,
+    location,
+    price,
+    description,
+    imageUrl,
+    bhkType,
+    bedrooms,
+    bathrooms,
+    kitchenCount,
+    pujaRoom,
+    ac,
+    amenitiesNearby,
+    addedBy: req.user.id,
+  };
+
+  homes.push(newHome);
+  res.status(201).json(newHome);
+});
+
+// UPDATE Home (Admin only)
+app.put("/api/homes/:id", authenticateToken, authorizeRole("admin"), (req, res) => {
+  const itemId = req.params.id;
+  console.log(itemId,typeof(itemId))
+  const item = homes.find((i) => i.id === itemId);
+  if (!item) return res.status(404).json({ message: "Home not found" });
+
+  const {
+    title,
+    location,
+    price,
+    description,
+    imageUrl,
+    bhkType,
+    bedrooms,
+    bathrooms,
+    kitchenCount,
+    pujaRoom,
+    ac,
+    amenitiesNearby,
+  } = req.body;
+
+  item.title = title ?? item.title;
+  item.location = location ?? item.location;
+  item.price = price ?? item.price;
+  item.description = description ?? item.description;
+  item.imageUrl = imageUrl ?? item.imageUrl;
+  item.bhkType = bhkType ?? item.bhkType;
+  item.bedrooms = bedrooms ?? item.bedrooms;
+  item.bathrooms = bathrooms ?? item.bathrooms;
+  item.kitchenCount = kitchenCount ?? item.kitchenCount;
+  item.pujaRoom = pujaRoom ?? item.pujaRoom;
+  item.ac = ac ?? item.ac;
+  item.amenitiesNearby = amenitiesNearby ?? item.amenitiesNearby;
+
+  res.json(item);
+});
+
+// DELETE Home (Admin only)
+app.delete("/api/homes/:id", authenticateToken, authorizeRole("admin"), (req, res) => {
+  const itemId = req.params.id;
+  const index = homes.findIndex((i) => i.id === itemId);
+  if (index === -1) return res.status(404).json({ message: "Home not found" });
+
+  homes.splice(index, 1);
+  res.json({ message: "Home deleted successfully" });
+});
+
+
+
+
+
+// GET all plots
+app.get("/api/plots", authenticateToken, (req, res) => {
+  res.json(plots);
+});
+
+;
+
+// CREATE a new plot (Admin only)
+app.post(
+  "/api/plots",
+  authenticateToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const {
+      title,
+      location,
+      price,
+      description,
+      imageUrl,
+      areaSqFt,
+      plotType,
+      facingDirection,
+      roadWidth,
+      availability,
+      nearbyAmenities,
+    } = req.body;
+
+    if (
+      !title ||
+      !location ||
+      !price ||
+      !description ||
+      !imageUrl ||
+      !areaSqFt ||
+      !plotType ||
+      !facingDirection ||
+      !roadWidth ||
+      !availability ||
+      !nearbyAmenities ||
+      !Array.isArray(nearbyAmenities)
+    ) {
+      return res.status(400).json({
+        message:
+          "All fields including nearbyAmenities (as array) are required",
+      });
+    }
+
+    const newPlot = {
+      id: uuidv4(), // simple id, consider uuid for production
+      title,
+      location,
+      price,
+      description,
+      imageUrl,
+      areaSqFt,
+      plotType,
+      facingDirection,
+      roadWidth,
+      availability,
+      nearbyAmenities,
+      addedBy: req.user.id,
+    };
+
+    plots.push(newPlot);
+    res.status(201).json(newPlot);
+  }
+);
+
+// UPDATE a plot by id (Admin only)
+app.put(
+  "/api/plots/:id",
+  authenticateToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const plotId = req.params.id;
+    const plot = plots.find((p) => p.id === plotId);
+    if (!plot) return res.status(404).json({ message: "Plot not found" });
+
+    const {
+      title,
+      location,
+      price,
+      description,
+      imageUrl,
+      areaSqFt,
+      plotType,
+      facingDirection,
+      roadWidth,
+      availability,
+      nearbyAmenities,
+    } = req.body;
+
+    plot.title = title ?? plot.title;
+    plot.location = location ?? plot.location;
+    plot.price = price ?? plot.price;
+    plot.description = description ?? plot.description;
+    plot.imageUrl = imageUrl ?? plot.imageUrl;
+    plot.areaSqFt = areaSqFt ?? plot.areaSqFt;
+    plot.plotType = plotType ?? plot.plotType;
+    plot.facingDirection = facingDirection ?? plot.facingDirection;
+    plot.roadWidth = roadWidth ?? plot.roadWidth;
+    plot.availability = availability ?? plot.availability;
+    plot.nearbyAmenities = nearbyAmenities ?? plot.nearbyAmenities;
+
+    res.json(plot);
+  }
+);
+
+// DELETE a plot by id (Admin only)
+app.delete(
+  "/api/plots/:id",
+  authenticateToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const plotId = req.params.id;
+    const index = plots.findIndex((p) => p.id === plotId);
+    if (index === -1) return res.status(404).json({ message: "Plot not found" });
+
+    plots.splice(index, 1);
+    res.json({ message: "Plot deleted successfully" });
+  }
+);
+
+
 createCrudRoutes("flats", flats);
 
 // === Start Server ===

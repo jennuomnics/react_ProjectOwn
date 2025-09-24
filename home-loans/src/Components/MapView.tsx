@@ -38,9 +38,10 @@ interface Props {
     setOpenMap:(e:boolean) => void,
     handleOpenMap:() => void,
     handleCloseMap:() => void,
+    handleOpenOld:() => void,
 }
 
-const MapView = ({openMap,setOpenMap,handleOpenMap,handleCloseMap}:Props) => {
+const MapView = ({openMap,setOpenMap,handleOpenMap,handleCloseMap,handleOpenOld}:Props) => {
   const { lat, lng } = useSelector((state: RootState) => state.maps);
    
   const position = [lat, lng];
@@ -55,7 +56,11 @@ const MapView = ({openMap,setOpenMap,handleOpenMap,handleCloseMap}:Props) => {
       <Box sx={style}>
         <IconButton
           aria-label="close"
-          onClick={handleCloseMap}
+          onClick={() => {
+            handleCloseMap()
+            handleOpenOld()
+          }
+          }
           sx={{
             position: "absolute",
             top: 8,

@@ -3,12 +3,18 @@ import api from '../axios'
 import toast from "react-hot-toast";
 
 export interface plotSchema {
-    id?:number,
-    title:string,
-    location:string,
-    price:number,
-    description:string,
-    imageUrl: string,
+  id?: string;
+  title: string;
+  location: string;
+  price: number;
+  description: string;
+  imageUrl: string;
+  areaSqFt: number;
+  plotType: string;
+  facingDirection: string;
+  roadWidth: string;
+  availability: string;
+  nearbyAmenities:string[]
 }
 
 export interface plotStructure {
@@ -29,7 +35,7 @@ export const getPlots = createAsyncThunk('plots/getPlots',async() => {
     return response.data
 })
 
-export const deletePlots = createAsyncThunk('plots/deletePlot',async(id:number | undefined)=> {
+export const deletePlots = createAsyncThunk('plots/deletePlot',async(id:string | undefined)=> {
     const response = await api.delete(`/plots/${id}`)
      toast.success("plot has deleted Successfully");
     return id;

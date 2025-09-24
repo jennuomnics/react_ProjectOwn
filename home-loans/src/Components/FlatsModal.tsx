@@ -1,6 +1,12 @@
-import { Field, Form, Formik, useFormikContext, type FormikHelpers, type FormikProps } from "formik";
+import {
+  Field,
+  Form,
+  Formik,
+  useFormikContext,
+  type FormikHelpers,
+  type FormikProps,
+} from "formik";
 import { addFlatValidation, addHomeValidation } from "../schema/register";
-
 
 import Box from "@mui/material/Box";
 
@@ -13,13 +19,12 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../store";
 import MapView from "./MapView";
 
-
 interface addFlatSchema {
   title: string;
   location: string;
   price: number;
   description: string;
-  imageUrl: File | null; // <-- File type for uploaded file, or null initially
+  imageUrl: File | null;
 }
 
 const style = {
@@ -45,16 +50,14 @@ interface modalSchema {
     Values: addFlatSchema,
     action: FormikHelpers<addFlatSchema>
   ) => void;
-  previewImage:string
+  previewImage: string;
 }
-
 
 interface preImage {
-  previewImage:string
+  previewImage: string;
 }
 
-// Create a separate component to watch imageUrl and generate preview
-const ImagePreview = ({previewImage}:preImage) => {
+const ImagePreview = ({ previewImage }: preImage) => {
   const { values } = useFormikContext<addFlatSchema>();
   const [preview, setPreview] = useState<string | null>(previewImage);
 
@@ -64,7 +67,7 @@ const ImagePreview = ({previewImage}:preImage) => {
       console.log(objectUrl);
       setPreview(objectUrl);
       return () => URL.revokeObjectURL(objectUrl);
-    } 
+    }
   }, [values.imageUrl]);
 
   if (!preview) return null;
@@ -83,7 +86,6 @@ const ImagePreview = ({previewImage}:preImage) => {
   );
 };
 
-
 const FlatsModal = ({
   open,
   setOpen,
@@ -94,20 +96,23 @@ const FlatsModal = ({
   handleSubmit,
   previewImage,
 }: modalSchema) => {
-  
-  const {location} = useSelector((state:RootState) => state.maps)
+  const { location } = useSelector((state: RootState) => state.maps);
+  console.log("Updated Modal");
+  const FormikRef = useRef<FormikProps<addFlatSchema>>(null);
+  const [openMap, setOpenMap] = useState(false);
+  const [showParentModal, setShowParentModal] = useState(true);
+  const handleOpenMap = () => setOpenMap(true);
+  const handleCloseMap = () => setOpenMap(false);
 
-  const FormikRef = useRef<FormikProps<addFlatSchema>>(null)
-    const [openMap, setOpenMap] = useState(false);
-    const handleOpenMap = () => setOpenMap(true);
-    const handleCloseMap = () => setOpenMap(false);
+  const handleOpenOld = () => {
+    setShowParentModal(true);
+  };
 
   useEffect(() => {
-   
-    if(location && FormikRef.current) {
-      FormikRef.current.setFieldValue('location',location)
+    if (location && FormikRef.current) {
+      FormikRef.current.setFieldValue("location", location);
     }
-  })
+  });
 
   return (
     <div>
@@ -116,12 +121,14 @@ const FlatsModal = ({
         setOpenMap={setOpenMap}
         handleOpenMap={handleOpenMap}
         handleCloseMap={handleCloseMap}
+        handleOpenOld={handleOpenOld}
       />
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        className={showParentModal ? "block" : "hidden"}
       >
         <Box sx={style}>
           <IconButton
@@ -192,7 +199,9 @@ const FlatsModal = ({
                       </label>
                       <button
                         type="button"
-                        onClick={() => setOpenMap(true)}
+                        onClick={() => {setOpenMap(true)
+                          setShowParentModal(false)
+                        }}
                         className="py-1 px-6 mt-2 rounded-2xl bg-stone-800 text-white font-bold cursor-pointer"
                       >
                         Select Loction

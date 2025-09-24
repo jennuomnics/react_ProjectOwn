@@ -1,61 +1,53 @@
-import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
+
 
 import { useState } from "react";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import { Field, Form, Formik, type FormikHelpers } from "formik";
 
-import CloseIcon from "@mui/icons-material/Close";
+import {  type FormikHelpers } from "formik";
+
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../store";
-import { addHomeValidation } from "../../schema/register";
-import { deleteHome, fetchData, updateHome } from "../../Slices/homeSlice";
+
+import { deleteHome, fetchData, updateHome, type addHomeSchema } from "../../Slices/homeSlice";
 import { addToCart } from "../../Slices/cartSlice";
 import toast from "react-hot-toast";
+import {
+  UserGroupIcon,
+  BuildingOfficeIcon,
+  FireIcon,
+  SparklesIcon,
+  MapPinIcon,
+} from "@heroicons/react/24/solid";
+import HomesModal from "../../Components/HomesModal";
+
+
 
 export interface homeSchema {
-  id: number;
+  id: string;
   title: string;
   location: string;
   price: number;
   description: string;
   imageUrl: string;
+  bhkType: string;
+  bedrooms: number;
+  bathrooms: number;
+  kitchenCount: number;
+  pujaRoom: boolean;
+  ac: boolean;
+  amenitiesNearby:string[];
 }
 
-const style = {
-  position: "absolute" as const,
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 800,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 4,
-  borderRadius: 2,
-};
 
-interface addHomeSchema {
-  title: string;
-  location: string;
-  price: number;
-  description: string;
-  imageUrl: string;
-}
 
 interface HomeListProps {
   home: homeSchema;
 }
 
 const HomesList = ({ home }: HomeListProps) => {
-  const { id, title, location, price, description, imageUrl } = home;
-
+  const { id, title, location, price, description, imageUrl,bhkType,bedrooms,bathrooms,kitchenCount,pujaRoom,ac,amenitiesNearby} = home;
   const { cart } = useSelector((state: RootState) => state.cart);
 
-  const isAdded = cart.find((item) => item.id === id)
- 
+  const isAdded = cart.find((item) => item.id === id);
 
   const dispatch = useDispatch<AppDispatch>();
   const [open, setOpen] = useState(false);
@@ -82,184 +74,151 @@ const HomesList = ({ home }: HomeListProps) => {
       totalPrice: price,
     };
     dispatch(addToCart(cartItem));
-    toast.success(`${title} added to Cart`)
+    toast.success(`${title} added to Cart`);
   };
 
   const handleDelete = async () => {
     await dispatch(deleteHome(id));
-    dispatch(fetchData()); // ✅ Refetch homes after deletion
+    dispatch(fetchData());
   };
 
   return (
-    <li className="bg-white shadow-2xl  rounded-md flex flex-col  w-90">
-      <img
-        src={imageUrl}
-        className=""
-        style={{ height: "250px", objectFit: "fill" }}
-      />
+    <li>
+      <div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-90 h-180">
+        <img
+          src={imageUrl}
+          alt="card-image"
+          style={{ height: "250px", objectFit: "fill" }}
+        />
+        <div className="p-4 bg-white dark:bg-gray-800">
+          <div className="flex items-center justify-between mb-3">
+            <h6 className="mb-2 text-slate-800 text-xl font-semibold">
+              {title}
+            </h6>
 
-      <div className="p-4">
-        <div className="flex justify-between items-center mb-3">
-          <h1 className="text-stone-800 font-bold">{title}</h1>
+            <div className="flex items-center gap-6 text-gray-700 dark:text-neutral-300 font-semibold">
+              <p>{bhkType}</p>
+            </div>
+          </div>
 
-          <MdDelete
-            className="text-2xl cursor-pointer"
-            onClick={handleDelete}
-          />
-          <FaEdit className="text-2xl cursor-pointer" onClick={handleOpen} />
+          <div className="text-gray-600 dark:text-neutral-400 text-sm flex items-center justify-between">
+            <p className="flex items-baseline gap-1">
+              <span className="text-2xl font-extrabold text-gray-900 dark:text-neutral-100">
+                $
+              </span>
+              <span className="text-2xl font-bold text-gray-800 dark:text-neutral-200">
+                {price}
+              </span>
+            </p>
+            <p className={ac ? "text-blue-600" : "text-red-600"}>
+              {ac ? "AC" : "Non AC"}
+            </p>
+          </div>
         </div>
-        <p className="font-bold text-green-800 text-center bg-green-100 mb-3">
-          {price} Availble in Less Cost
-        </p>
-        <p className="bg-stone-200 text-dark px-3 text-center py-1">
-          {description}
-          🏟️{location}
-        </p>
-        <div className="flex justify-between p-3 items-center">
+
+        <div className="px-4 h-20">
+          <div className="flex items-center gap-2">
+            <MapPinIcon className="h-5 w-5 text-red-600" /> {location}
+          </div>
+
+          <p className="text-slate-600 leading-normal font-light">
+            {description}
+          </p>
+        </div>
+        <div className="flex flex-col md:flex-row gap-8 p-6 bg-white h-50 ">
+          <div className="flex flex-col gap-4 text-gray-800">
+            <div className="flex items-center gap-3">
+              <UserGroupIcon className="h-6 w-6 text-blue-600" />
+              <p>{bedrooms} Bedrooms</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <BuildingOfficeIcon className="h-6 w-6 text-indigo-600" />
+              <p>{bathrooms} Bathrooms</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <FireIcon className="h-6 w-6 text-red-500" />
+              <p>{kitchenCount} Kitchens</p>
+            </div>
+           {pujaRoom && <div className="flex items-center gap-3">
+              <SparklesIcon className="h-6 w-6 text-yellow-500" />
+              <p>{pujaRoom} Puja Room</p>
+            </div>}
+          </div>
+
+          <div className="flex flex-col gap-2 text-gray-700">
+            <h3 className="text-lg font-semibold mb-2">Nearby Amenities</h3>
+            {amenitiesNearby.map((each, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <MapPinIcon className="h-5 w-5 text-green-600" />
+                <p>{each}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="px-4 pb-4 pt-0 mt-2 flex gap-4">
           <button
-            onClick={handleAddtoCart}
-            disabled={isAdded ? true:false}
-            className={`py-2 px-10 rounded-2xl font-bold cursor-pointer transition-opacity ${
-              isAdded
-                ? "bg-gray-400 text-white cursor-not-allowed opacity-70"
-                : "bg-yellow-400 text-black"
-            }`}
+            disabled={isAdded ? true : false}
+            className="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            type="button"
+            onClick={() => handleAddtoCart()}
           >
             {isAdded ? "Already Added" : "Add to Cart"}
           </button>
-
-          <button className="py-2 px-10 rounded-2xl bg-green-600 text-white font-bold cursor-pointer">
-            Buy
-          </button>
+          <div className="flex items-center space-x-4">
+            <button
+              className="rounded-md bg-blue-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-blue-700 focus:shadow-none active:bg-blue-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button"
+              onClick={handleOpen}
+            >
+              update
+            </button>
+            <button
+              type="button"
+              className="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+              onClick={() => handleDelete()}
+            >
+              <svg
+                className="mr-1 -ml-1 w-5 h-5"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              Delete
+            </button>
+          </div>
         </div>
       </div>
 
-      <div>
-        <Modal
+      {open && (
+        <HomesModal
           open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <IconButton
-              aria-label="close"
-              onClick={handleClose}
-              sx={{
-                position: "absolute",
-                top: 8,
-                right: 8,
-                color: (theme) => theme.palette.grey[500],
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Add new Home
-            </Typography>
-            <Typography
-              id="modal-modal-description"
-              sx={{ mt: 2 }}
-              component="div"
-            >
-              <Formik
-                initialValues={{
-                  title,
-                  location,
-                  price,
-                  description,
-                  imageUrl,
-                }}
-                validationSchema={addHomeValidation}
-                onSubmit={handleUpdateHome}
-              >
-                {({ errors, touched }) => (
-                  <Form className="bg-white p-5 shadow-xl rounded-md w-180 h-90 overflow-y-auto">
-                    <div className="flex flex-col mb-3">
-                      <label className="font-bold">title</label>
-                      <Field
-                        type="text"
-                        className="w-full outline-0 my-3 shadow-md p-3 rounded-md"
-                        name="title"
-                        placeholder="enter title"
-                      />
-                      {errors.title && touched.title && (
-                        <p className="text-red-400 text-center bg-red-200">
-                          {errors.title}
-                        </p>
-                      )}
-                    </div>
-                    <div className="flex flex-col mb-3">
-                      <label className="font-bold">location</label>
-                      <Field
-                        type="text"
-                        className="w-full outline-0 my-3 shadow-md p-3 rounded-md"
-                        name="location"
-                        placeholder="enter location"
-                      />
-                      {errors.location && touched.location && (
-                        <p className="text-red-400 text-center bg-red-200">
-                          {errors.location}
-                        </p>
-                      )}
-                    </div>
-                    <div className="flex flex-col mb-3">
-                      <label className="font-bold">price</label>
-                      <Field
-                        type="number"
-                        className="w-full outline-0 my-3 shadow-md p-3 rounded-md"
-                        name="price"
-                        placeholder="enter price"
-                      />
-                      {errors.price && touched.price && (
-                        <p className="text-red-400 text-center bg-red-200">
-                          {errors.price}
-                        </p>
-                      )}
-                    </div>
-                    <div className="flex flex-col mb-3">
-                      <label className="font-bold">description</label>
-                      <Field
-                        as="textarea"
-                        className="w-full outline-0 my-3 shadow-md p-3 rounded-md"
-                        name="description"
-                        placeholder="enter description"
-                      ></Field>
-                      {errors.description && touched.description && (
-                        <p className="text-red-400 text-center bg-red-200">
-                          {errors.description}
-                        </p>
-                      )}
-                    </div>
-                    <div className="flex flex-col mb-3">
-                      <label className="font-bold">imageUrl</label>
-                      <Field
-                        type="text"
-                        className="w-full outline-0 my-3 shadow-md p-3 rounded-md"
-                        name="imageUrl"
-                        placeholder="enter imageUrl"
-                      />
-                      {errors.imageUrl && touched.imageUrl && (
-                        <p className="text-red-400 text-center bg-red-200">
-                          {errors.imageUrl}
-                        </p>
-                      )}
-                    </div>
-                    <div className="flex justify-center mt-4">
-                      <button
-                        type="submit"
-                        className="py-2 px-10 rounded-2xl bg-stone-800 text-white font-bold cursor-pointer"
-                      >
-                        AddHome
-                      </button>
-                    </div>
-                  </Form>
-                )}
-              </Formik>
-            </Typography>
-          </Box>
-        </Modal>
-      </div>
+          setOpen={setOpen}
+          handleClose={handleClose}
+          handleOpen={handleOpen}
+          intialValues={{
+            title,
+            location,
+            price,
+            description,
+            imageUrl,
+            bhkType,
+            bedrooms,
+            bathrooms,
+            kitchenCount,
+            pujaRoom,
+            ac,
+            amenitiesNearby,
+          }}
+          fun="Update"
+          handleSubmit={handleUpdateHome}
+        />
+      )}
     </li>
   );
 };

@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 
 export interface CartItemsSchema {
-    id:number,
+    id:string,
     title:string,
     location:string,
     price:number,
@@ -42,10 +42,10 @@ const cartSlice = createSlice({
             
         },
 
-        removeFromCart:(state,action:PayloadAction<number>) => {
+        removeFromCart:(state,action:PayloadAction<string>) => {
             state.cart = state.cart.filter((item) => item.id !== action.payload)
         },
-        increaseQuantity:(state,action:PayloadAction<number>) => {
+        increaseQuantity:(state,action:PayloadAction<string>) => {
             const item = state.cart.find((item) => item.id === action.payload);
             if(item) {
                 item.quantity += 1;
@@ -53,7 +53,7 @@ const cartSlice = createSlice({
             }
             
         },
-        decreaseQuantity:(state,action:PayloadAction<number>) => {
+        decreaseQuantity:(state,action:PayloadAction<string>) => {
              const item = state.cart.find((item) => item.id === action.payload);
              if(item) {
                 item.quantity--;

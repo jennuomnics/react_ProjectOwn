@@ -1,8 +1,8 @@
 
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState } from "react";
 import Loader from "../../Components/Loader";
-import Modals from "../../Components/Modals";
+
 
 import type { FormikHelpers } from "formik";
 import { useFlats, type flatsSchema } from "../../Contexts/FlatsContext";
@@ -22,7 +22,7 @@ interface addFlatSchema {
   location: string;
   price: number;
   description: string;
-  imageUrl: File | null; // <-- File type for uploaded file, or null initially
+  imageUrl: File | null; 
 }
 
 const Flats = () => {
@@ -77,7 +77,7 @@ const Flats = () => {
           ))}
         </ul>
       )}
-      <FlatsModal
+      {open && <FlatsModal
         open={open}
         setOpen={setOpen}
         handleOpen={handleOpen}
@@ -86,7 +86,7 @@ const Flats = () => {
         fun='add'
         handleSubmit={handleSubmit}
         previewImage=""
-      />
+      />}
     </div>
   );
 };

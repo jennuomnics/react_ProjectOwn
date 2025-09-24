@@ -23,10 +23,17 @@ export interface addHomeSchema {
   price: number;
   description: string;
   imageUrl: string;
+  bhkType: string;
+  bedrooms: number;
+  bathrooms: number;
+  kitchenCount: number;
+  pujaRoom: boolean;
+  ac: boolean;
+  amenitiesNearby: string[];
 }
 
 interface updateHome {
-    id:number,
+    id:string,
     newHome:addHomeSchema
 }
 
@@ -55,7 +62,7 @@ export const updateHome = createAsyncThunk(
 );
 
 
-export const deleteHome = createAsyncThunk('homes/deleteHomes',async(id:number)=> {
+export const deleteHome = createAsyncThunk('homes/deleteHomes',async(id:string)=> {
     const response = await axios.delete(`/homes/${id}`);
     toast.success("home deleted Successfully");
     return id;
