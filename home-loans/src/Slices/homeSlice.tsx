@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { type homeSchema } from "../Pages/Homes/HomesList.tsx";
 import axios from '../axios.ts'
 import toast from "react-hot-toast";
+import type { addHomeSchema, homeSchema } from "../Pages/Homes/HomesSchema.tsx";
 
 export interface homesStructure {
     homes:homeSchema[],
@@ -17,20 +17,7 @@ const initialState : homesStructure ={
 }
 
 
-export interface addHomeSchema {
-  title: string;
-  location: string;
-  price: number;
-  description: string;
-  imageUrl: string;
-  bhkType: string;
-  bedrooms: number;
-  bathrooms: number;
-  kitchenCount: number;
-  pujaRoom: boolean;
-  ac: boolean;
-  amenitiesNearby: string[];
-}
+
 
 interface updateHome {
     id:string,

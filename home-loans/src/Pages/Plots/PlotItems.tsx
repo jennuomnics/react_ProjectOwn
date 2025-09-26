@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { deletePlots, getPlots, updatePlots, type plotSchema } from "../../Slices/plotSlice";
+import { deletePlots, getPlots, updatePlots } from "../../Slices/plotSlice";
 import Modals from "../../Components/Modals";
 import { useDispatch, useSelector } from "react-redux";
 import { type AppDispatch, type RootState } from "../../store";
@@ -14,6 +14,7 @@ import {
   CheckCircleIcon,
   MapPinIcon,
 } from "@heroicons/react/24/outline";
+import type { plotSchema } from "./PlotSchema";
 
 interface plotDetails {
     plot:plotSchema
@@ -41,6 +42,8 @@ const PlotItems = ({plot}:plotDetails) => {
     const {cart} = useSelector((state:RootState) => state.cart)
 
     const isAdded = cart.find((item) => item.id === id)
+
+    const isAdmin = localStorage.getItem('isAdmin')
 
     const intialValues = {
       title,
@@ -172,7 +175,7 @@ const PlotItems = ({plot}:plotDetails) => {
             {isAdded ? "Already Added" : "Add to Cart"}
           </button>
 
-          <div className="flex items-center space-x-4">
+        {isAdmin &&  <div className="flex items-center space-x-4">
             <button
               className="rounded-md bg-blue-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-blue-700 focus:shadow-none active:bg-blue-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="button"
@@ -200,7 +203,7 @@ const PlotItems = ({plot}:plotDetails) => {
               </svg>
               Delete
             </button>
-          </div>
+          </div>}
         </div>
       </div>
 

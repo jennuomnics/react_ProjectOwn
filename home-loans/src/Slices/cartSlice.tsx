@@ -16,12 +16,14 @@ interface CartSchema {
     cart:CartItemsSchema[],
     isLoading:boolean,
     cartError:string,
+    bookingStatus:boolean
 }
 
 const initialState:CartSchema = {
     cart:[],
     isLoading:false,
-    cartError:''
+    cartError:'',
+    bookingStatus:false
 }
 
 
@@ -44,6 +46,9 @@ const cartSlice = createSlice({
 
         removeFromCart:(state,action:PayloadAction<string>) => {
             state.cart = state.cart.filter((item) => item.id !== action.payload)
+            if(state.cart.length === 0) {
+                state.bookingStatus = false
+            }
         },
         increaseQuantity:(state,action:PayloadAction<string>) => {
             const item = state.cart.find((item) => item.id === action.payload);
@@ -62,12 +67,15 @@ const cartSlice = createSlice({
                     cartSlice.caseReducers.removeFromCart(state,action)
                 }
              }
+        },
+        updateStatus:(state) => {
+            state.bookingStatus = !state.bookingStatus
         }
 
     }
 })
 
-export const {addToCart,removeFromCart,increaseQuantity,decreaseQuantity} = cartSlice.actions
+export const {addToCart,removeFromCart,increaseQuantity,decreaseQuantity,updateStatus} = cartSlice.actions
 
 export default cartSlice.reducer;
 

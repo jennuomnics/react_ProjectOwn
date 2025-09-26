@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 
 import api from '../axios'
 import axios, { isAxiosError } from "axios";
+import type { flatsSchema } from "../Pages/Flats/FlatsSchema";
 
 
 
@@ -17,33 +18,11 @@ interface FlatContextType {
   getFlats: () => Promise<void>;
   addFlat: (newFlat: flatsSchema) => Promise<void>;
   updateFlat: (updateFlat: flatsSchema) => Promise<void>;
-  deleteFlat: (id: number) => Promise<void>;
+  deleteFlat: (id: string) => Promise<void>;
 }
 
 
-export interface flatsSchema {
-  id?: string;
-  title: string;
-  location: string;
-  description: string;
-  imageUrl: string;
-  price: number;
-  bhkType: string;
-  bedrooms: number;
-  bathrooms: number;
-  balconies: number;
-  floorNumber: number;
-  totalFloors: number;
-  furnishing: string;
-  availability: string;
-  parking: string;
-  nearbyAmenities: string[];
-  areaSqFt: number;
-  acAvailable: boolean;
-  liftAvailable: boolean;
-  security: boolean;
-  powerBackup: boolean;
-}
+
 
 interface flatsStructure {
     flats:flatsSchema[],
@@ -61,7 +40,7 @@ const initialState = {
 
 
 type Action = {type:'addPlots',payload:flatsSchema[]} | {type:'addPlot',payload:flatsSchema} 
-| {type:'deletePlot',payload:number}
+| {type:'deletePlot',payload:string}
 | {type:'updatePlot',payload:flatsSchema}
 | {type:'loading'}
 | {type:'error',payload:string}
@@ -134,7 +113,7 @@ const FlatContext = ({children}:childElements) => {
         }
     }
 
-    const deleteFlat = async(id:number):Promise<void> => {
+    const deleteFlat = async(id:string):Promise<void> => {
          try {
             const response = await api.delete(`/flats/${id}`)
             dispatch({type:'deletePlot',payload:id})

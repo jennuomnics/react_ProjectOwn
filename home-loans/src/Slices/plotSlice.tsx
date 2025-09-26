@@ -1,21 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from '../axios'
 import toast from "react-hot-toast";
-
-export interface plotSchema {
-  id?: string;
-  title: string;
-  location: string;
-  price: number;
-  description: string;
-  imageUrl: string;
-  areaSqFt: number;
-  plotType: string;
-  facingDirection: string;
-  roadWidth: string;
-  availability: string;
-  nearbyAmenities:string[]
-}
+import type { plotSchema } from "../Pages/Plots/PlotSchema";
 
 export interface plotStructure {
     plots: plotSchema[],

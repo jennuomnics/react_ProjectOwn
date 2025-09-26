@@ -297,7 +297,7 @@ let flats = [
     title: "Furnished 1BHK in Mumbai",
     location: "Mumbai",
     price: 66000, // ₹5,500,000
-    bhkType: "1BHK",
+    bhkType: "4 BHK",
     bedrooms: 1,
     bathrooms: 1,
     balconies: 1,
@@ -309,9 +309,9 @@ let flats = [
     nearbyAmenities: ["Metro", "Hospital", "Supermarket"],
     areaSqFt: 550,
     acAvailable: true,
-    liftAvailable: true,
-    security: true,
-    powerBackup: true,
+    liftAvailable: false,
+    security: false,
+    powerBackup: false,
     description: "Compact furnished flat ideal for working professionals.",
     imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPnrqWdWoi1wMW_1t1Ni_rU6K-oZrrSLFGXyuCSAL8E-bi0sbc3n3M52GMcEFD21qy__o&usqp=CAU",
@@ -323,7 +323,7 @@ let flats = [
     title: "2BHK Flat in Chennai",
     location: "Chennai",
     price: 84000, // ₹7,000,000
-    bhkType: "1BHK",
+    bhkType: "3 BHK",
     bedrooms: 1,
     bathrooms: 1,
     balconies: 1,
@@ -349,7 +349,7 @@ let flats = [
     title: "Studio Apartment in Bangalore",
     location: "Bangalore",
     price: 48000, // ₹4,000,000
-    bhkType: "1BHK",
+    bhkType: "2 BHK",
     bedrooms: 1,
     bathrooms: 1,
     balconies: 1,
@@ -376,7 +376,7 @@ let flats = [
     title: "Luxury 3BHK in Gurgaon",
     location: "Gurgaon",
     price: 120000, // ₹10,000,000
-    bhkType: "1BHK",
+    bhkType: "1 BHK",
     bedrooms: 1,
     bathrooms: 1,
     balconies: 1,
@@ -402,7 +402,7 @@ let flats = [
     title: "Budget Flat in Indore",
     location: "Indore",
     price: 31200, // ₹2,600,000
-    bhkType: "1BHK",
+    bhkType: "1 BHK",
     bedrooms: 1,
     bathrooms: 1,
     balconies: 1,
@@ -413,8 +413,8 @@ let flats = [
     parking: "Covered",
     nearbyAmenities: ["Metro", "Hospital", "Supermarket"],
     areaSqFt: 550,
-    acAvailable: true,
-    liftAvailable: true,
+    acAvailable: false,
+    liftAvailable: false,
     security: false,
     powerBackup: false,
     description: "Affordable 2BHK in a peaceful society with basic amenities.",
@@ -500,6 +500,7 @@ app.post("/api/login", (req, res) => {
     accessToken,
     firstName: user.firstName,
     lastName: user.lastName,
+    role:user.role
   });
 });
 
